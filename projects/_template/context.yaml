@@ -1,0 +1,8 @@
+name: {project name}
+slug: {slug}
+status: active
+repo: null
+domains: []
+created: {YYYY-MM-DD}
+last_active: {YYYY-MM-DD}
+tags: []

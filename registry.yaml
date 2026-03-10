@@ -1,0 +1,16 @@
+# ~/context/registry.yaml
+# Master index. Claude reads this at every session start.
+# Updated automatically by /cg-setup and /cg-new-project.
+
+system:
+  initiated: false
+  initiated_at: null
+  version: "0.0"
+
+projects: {}
+
+domains: []
+
+reading_topics: []
+
+writing_topics: []
