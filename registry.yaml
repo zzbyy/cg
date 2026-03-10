@@ -3,13 +3,16 @@
 # Updated automatically by /cg-setup and /cg-new-project.
 
 system:
-  initiated: false
-  initiated_at: null
+  initiated: true
+  initiated_at: "2026-03-10"
   version: "0.0"
 
 projects: {}
 
-domains: []
+domains:
+  - dbt
+  - knowledge-system
+  - agentic-coding
 
 reading_topics: []
 

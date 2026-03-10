@@ -3,13 +3,13 @@
 # Populated during /cg-setup. Edit freely.
 
 communication:
-  tone: null           # e.g. direct, conversational, formal
-  response_length: null # e.g. concise, thorough, match-the-question
-  pushback: null       # e.g. yes-push-back, follow-my-lead
+  tone: direct
+  response_length: concise  # depth on request or when genuinely needed
+  pushback: follow-my-lead  # explore options together, but don't override
 
 decisions:
-  style: null          # e.g. give-options, give-recommendation, bottom-line-first
-  show_rationale: null # e.g. always, on-request, never
+  style: give-options-then-recommend
+  show_rationale: always
 
 code:
   style: null

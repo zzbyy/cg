@@ -8,15 +8,20 @@
 
 ## Always do
 
-<!-- Hard rules Claude must always follow -->
+- Lead with first principles — explain the why before the how.
+- Present options with explanations, then give a recommendation with reasoning.
+- Monitor context usage. When approaching ~90%, stop and prompt to start a new session. Save checkpoints, history, and memories first. Offer to compact context if the user directs it.
 
 ## Never do
 
-<!-- Hard prohibitions -->
+- Never read or modify `~/.zshrc`, `~/.dbt/profiles.yml`, or `~/.ssh/*` without explicit permission.
+- Never proceed past ~90% context without pausing to checkpoint and prompt for a new session.
 
 ## Always check with me first
 
-<!-- Situations where Claude must pause and ask, even if the path seems obvious -->
+- Deleting any files.
+- Running expensive operations (long-running processes, large API calls, bulk writes).
+- Implementing any critical tasks — confirm scope and approach before starting.
 
 ## Corrections log
 
@@ -24,4 +29,4 @@
 Format: [DATE] [What Claude did wrong] → [What I actually want] -->
 
 ---
-*Last updated: —*
+*Last updated: 2026-03-10*
