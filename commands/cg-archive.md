@@ -1,6 +1,16 @@
 # /cg-archive — Archive a Project
 
-List active projects from ~/context/registry.yaml.
+**What it does:** Moves a project from `projects/_active/` to `projects/_archived/`
+and removes it from the registry. Archived projects no longer load automatically at
+session start, keeping your active context clean.
+
+**When to run:** When a project is complete, paused indefinitely, or no longer relevant
+to your daily work. The project is not deleted — you can ask Claude to load it
+explicitly at any time, or unarchive it manually.
+
+---
+
+List active projects from `~/context/registry.yaml`.
 Ask: "Which project do you want to archive?"
 Confirm: "Archive {slug}? This moves it to _archived/ and removes it from active loading."
 

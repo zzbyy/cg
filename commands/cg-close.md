@@ -1,6 +1,18 @@
-# /cg-close — Force Session Closure
+# /cg-close — Session Closure
 
-Run the full session close protocol from CLAUDE.md.
+**What it does:** Runs the end-of-session routine — surfaces decisions made this
+session, proposes memory updates, asks about cross-project insights, appends to the
+history log, and commits everything. Nothing is written without your approval at
+each step.
+
+**When to run:** When you're done working for the day or wrapping up a task.
+Claude also initiates closure automatically when it detects the session is ending
+naturally. If a session is getting too long, run `/cg-checkpoint` first to save
+state, then `/cg-close` to capture what's worth keeping permanently.
+
+---
+
+Run the full session close protocol.
 
 ```bash
 eval "$(python3 ~/context/bin/cg-slug)"

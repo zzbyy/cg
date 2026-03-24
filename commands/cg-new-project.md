@@ -1,4 +1,15 @@
-# /cg-new-project — Add a New Project
+# /cg-new-project — Register a New Project
+
+**What it does:** Walks you through setting up a new project in your context system.
+Creates a project folder with `context.yaml`, `memory.md`, `decisions.md`, `tasks.md`,
+and `CLAUDE.md`. Registers the project in `registry.yaml` so it loads automatically
+whenever Claude detects you're working in that directory.
+
+**When to run:** When you start working on a new codebase, initiative, or area of work
+that deserves its own tracked context. You can run this any time — it's not part of
+the initial setup.
+
+---
 
 Guide the user through setting up a new project in the context system.
 
