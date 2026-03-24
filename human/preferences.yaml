@@ -1,26 +1,19 @@
 # ~/context/human/preferences.yaml
 # Style, tone, and tooling preferences.
-# Populated during /cg-setup. Edit freely.
+# Core fields populated during /cg-setup. Additional fields added organically
+# via the Monitor/Evaluator cycle as patterns emerge from real work.
 
 communication:
   tone: null               # direct / warm / formal
-  response_length: null    # concise / balanced / thorough
+  response_length: null    # concise / balanced / thorough — set by setup Q1
   pushback: null           # follow-my-lead / challenge-me / neutral
 
 decisions:
-  style: null              # give-options-then-recommend / bottom-line-first / explore-together
-  show_rationale: null     # always / on-request
+  style: null              # explore-together / bottom-line-first — set by setup Q2
+  show_rationale: null     # always / on-request — set by setup Q2
 
 code:
-  style: null
-  comments: null
-  testing: null
-
-writing:
-  voice: null
-  avoid: []
+  comments: null           # minimal / detailed — set by setup Q9
 
 tools:
-  editor: null
-  terminal: null
   version_control: git

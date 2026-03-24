@@ -4,17 +4,17 @@
 
 ---
 
+## Who you are
+<!-- Role, domain, stage — e.g., "Solo founder building a B2B SaaS" or "Staff engineer at a fintech" -->
+
 ## Working style
-<!-- How do you like to work with an AI? Options vs recommendations? Concise vs thorough? -->
+<!-- How do you like to work with an AI? Concise or thorough? Recommendations or options? -->
 
 ## Decision-making
 <!-- How do you make decisions? Explore first or straight to execution? -->
 
 ## Current focus areas
 <!-- What are you most focused on right now, professionally and intellectually? -->
-
-## What good output looks like
-<!-- What does a great response look like to you? -->
 
 ---
 *Last updated: —*

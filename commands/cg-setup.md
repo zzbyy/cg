@@ -17,7 +17,7 @@ Then stop — do not run any phases.
 If `system.initiated` is `false` (or the field is missing): begin Phase 1 immediately.
 **Critical:** Do NOT say "setup has not been run", "setup hasn't been completed", or any variant.
 Do NOT announce the state of the system. Do NOT use "Let's go" as an opener.
-Print the Phase 1 header and begin the welcome narrative — nothing else.
+Print the Welcome header and begin the welcome narrative — nothing else.
 
 ## Phases
 
@@ -48,15 +48,23 @@ keeping mid-session), and Evaluator (stages approved items at close). Then ask a
 Print the header: `## Phase 1 — Identity`
 Ask each question using AskUserQuestion, one at a time. Wait for the answer before asking the next.
 
-Q1 — Working style:
-  "How do you like to work with an AI?"
-  A) Give me options and let me decide — I like seeing the tradeoffs
-  B) Just tell me what you'd do — I trust your judgment, move fast
-  C) Mixed — recommendations usually, options for big decisions
+Q0 — Who are you:
+  "Describe yourself in one sentence — role, domain, and stage."
+  A) Solo founder / indie builder
+  B) Engineer at a company (startup / mid / large)
+  C) Researcher, student, or academic
+  D) Something else — I'll describe it
+  (If D or Other: ask them to describe themselves in one sentence)
+
+Q1 — Collaboration depth:
+  "When I respond, what do you want?"
+  A) Just the answer — assume I'm competent, be concise
+  B) Answer + reasoning — I want to understand why
+  C) Depends — concise for simple things, full context for complex decisions
 
 Q2 — Decision making:
   "How do you make decisions?"
-  A) Explore first, then decide — I need to understand the landscape
+  A) Explore first, then decide — I need to see the landscape
   B) Bottom line first — give me the recommendation, I'll ask if I want more
   C) Straight to execution — I have enough context, let's go
 
@@ -68,43 +76,77 @@ Q3 — Current focus (open, but offer starters):
   D) Something else — I'll describe it
   (If D or Other: ask them to describe it in one sentence)
 
-Q4 — Good output:
-  "What does good output look like to you?"
-  A) Concise — short answers that assume I'm competent
-  B) Thorough — full context and reasoning, I like to understand why
-  C) Depends — concise for simple things, thorough for complex decisions
+After collecting all answers, compose the draft content for `~/context/global/identity.md`.
+The first section must be "Who you are" derived from Q0 — this anchors everything else.
+Then include working style (from Q1), decision-making (from Q2), and current focus (from Q3).
 
-→ Write `~/context/global/identity.md` from the answers. Show it. Ask for corrections.
+Note: Q1 and Q2 also map to preferences.yaml fields — carry these answers forward
+to Phase 3 when composing preferences.yaml:
+- Q1 → communication.response_length (A→concise, B→thorough, C→balanced)
+- Q2 → decisions.style (A→explore-together, B→bottom-line-first, C→bottom-line-first)
+       decisions.show_rationale (A→on-request, B→on-request, C→on-request)
+
+Then use AskUserQuestion to present the draft:
+
+"Here's what I'll write to identity.md:
+
+---
+{draft content}
+---
+
+A) Save it — looks right
+B) Change something — I'll describe what to fix
+C) Redo this phase — ask the questions again"
+
+If B: ask what to change, update the draft, and re-present via AskUserQuestion before writing.
+If C: restart Phase 1 questions from Q0.
+Only write the file after A is chosen.
 
 **Phase 2 — Principles**
 Print the header: `## Phase 2 — Principles`
 Ask each question using AskUserQuestion.
 
-Q5 — Core beliefs (open, offer archetypes):
-  "What beliefs guide your work? Pick any that resonate, or describe your own."
+Q4 — Core beliefs (open, offer archetypes + anti-pattern option):
+  "What beliefs guide your work? Pick any that resonate, or write your own."
   (multiSelect: true)
   A) Ship small and verify — don't over-plan
   B) Understand deeply before acting — slow is smooth
   C) People and relationships first — process follows
   D) Constraints are creative — limits produce better work
-  E) Something else — I'll write my own
-  (If E or Other: ask them to state 1–3 beliefs in their own words)
+  E) Something I've learned NOT to do — I'll describe an anti-pattern
+  F) Something else — I'll write my own belief
+  (If E or F or Other: ask them to state their belief or anti-pattern in their own words)
 
-Q6 — Hard-won lessons (open, offer starters):
-  "What's something you've learned the hard way that you now always apply?"
+Q5 — Hard-won lessons (open, offer starters):
+  "What are 1–3 things you've learned the hard way that you now always apply?"
   A) Move fast but always test the thing you changed
   B) Say the hard thing early — surprises are worse later
   C) Document decisions, not just outcomes
-  D) Something else — I'll describe it
-  (If D or Other: ask for their answer)
+  D) Something else — I'll describe mine
+  (If D or Other: ask for their answer; they can list multiple)
 
-→ Write `~/context/global/principles.md`. Show it. Ask for corrections.
+After collecting all answers, compose the draft content for `~/context/global/principles.md`.
+Then use AskUserQuestion to present it:
+
+"Here's what I'll write to principles.md:
+
+---
+{draft content}
+---
+
+A) Save it — looks right
+B) Change something — I'll describe what to fix
+C) Redo this phase — ask the questions again"
+
+If B: ask what to change, update the draft, and re-present via AskUserQuestion before writing.
+If C: restart Phase 2 questions from Q4.
+Only write the file after A is chosen.
 
 **Phase 3 — Non-negotiables & Preferences**
 Print the header: `## Phase 3 — Non-negotiables & Preferences`
 Ask each question using AskUserQuestion.
 
-Q7 — Never do (multiselect + Other):
+Q6 — Never do (multiselect + Other):
   "What should I never do without asking you first?"
   (multiSelect: true)
   A) Commit or push code
@@ -113,6 +155,16 @@ Q7 — Never do (multiselect + Other):
   D) Delete or move files
   E) Something else — I'll describe it
   (If E or Other: ask them to add their own rule)
+
+Q7 — Always do (multiselect + Other):
+  "What should I always do, even if you forget to ask?"
+  (multiSelect: true)
+  A) Always run tests after editing code
+  B) Always suggest the simplest solution first
+  C) Always check existing code before writing new code
+  D) Always explain what you changed and why
+  E) Something else — I'll describe it
+  (If E or Other: ask them to describe their rule)
 
 Q8 — Always check (multiselect + Other):
   "What decisions should I always pause and confirm with you?"
@@ -123,17 +175,51 @@ Q8 — Always check (multiselect + Other):
   D) Before changing a file I haven't explicitly mentioned
   E) Something else — I'll describe it
 
-Q9 — Tone and format preferences (multiselect):
-  "Any preferences for how I communicate?"
+Q9 — Tone, format, and code preferences (multiselect):
+  "Any preferences for how I communicate and write code?"
   (multiSelect: true)
   A) No emojis
   B) No preamble — get to the point immediately
   C) Use markdown tables and structure when helpful
   D) Plain prose — avoid heavy formatting
   E) Never summarize what you just did at the end
-  F) Other — I'll describe it
+  F) Prefer concise code with minimal comments
+  G) Prefer well-commented code with explanations
+  H) Other — I'll describe it
 
-→ Write `~/context/human/non-negotiables.md` and `preferences.yaml` from the answers. Show both. Confirm.
+After collecting all answers, compose the draft content for both files.
+
+non-negotiables.md mapping:
+- Q7 answers → "Always do" section
+- Q6 answers → "Never do" section
+- Q8 answers → "Always check with me first" section
+
+preferences.yaml mapping (combine with Q1 and Q2 answers from Phase 1):
+- Q1 answer → communication.response_length (A→concise, B→thorough, C→balanced)
+- Q2 answer → decisions.style (A→explore-together, B→bottom-line-first, C→bottom-line-first)
+              decisions.show_rationale (A→on-request, B→on-request, C→on-request)
+- Q9 A,B,D,E → communication.tone or communication.pushback notes
+- Q9 F → code.comments: minimal
+- Q9 G → code.comments: detailed
+
+Then use AskUserQuestion to present them:
+
+"Here's what I'll write to non-negotiables.md and preferences.yaml:
+
+--- non-negotiables.md ---
+{draft content}
+
+--- preferences.yaml ---
+{draft content}
+---
+
+A) Save both — looks right
+B) Change something — I'll describe what to fix
+C) Redo this phase — ask the questions again"
+
+If B: ask what to change, update the drafts, and re-present via AskUserQuestion before writing.
+If C: restart Phase 3 questions from Q6.
+Only write the files after A is chosen.
 
 **Phase 4 — Domains**
 Print the header: `## Phase 4 — Domains`
@@ -149,16 +235,48 @@ Q10 — Active domains (multiselect):
   F) Other — I'll name it
   (If F or Other: ask them to name the domain)
 
-For each selected domain, ask one seed question via AskUserQuestion with 3–4 suggested
+For each selected domain, ask two seed questions via AskUserQuestion with 3–4 suggested
 answers plus Other:
-- Coding → "What's your primary stack?" (options: Rails/Ruby, Next.js/TypeScript, Python, Go, Other)
-- Writing → "What's your default voice/audience?" (options: technical, narrative, business, academic, Other)
-- Design → "What's your design sensibility?" (options: minimal/functional, bold/expressive, system-driven, Other)
-- Research → "What matters most in your research process?" (options: depth over speed, structured frameworks, serendipitous connections, Other)
-- Data → "What's your primary data environment?" (options: SQL/warehouses, Python/notebooks, dashboards/BI tools, Other)
-- Other domains → "What's the most important thing to know about how you work in this domain?" (open with Other)
 
-Write each domain's answer into `~/context/domains/{domain}/memory.md`.
+Coding:
+- Q10a: "What's your primary stack?" (options: Rails/Ruby, Next.js/TypeScript, Python, Go, Other)
+- Q10b: "What matters most in your code?" (options: readability, performance, simplicity, test coverage, Other)
+
+Writing:
+- Q10a: "What's your default voice/audience?" (options: technical, narrative, business, academic, Other)
+- Q10b: "What do you actively avoid in writing?" (options: jargon, passive voice, long paragraphs, over-explaining, Other)
+
+Design:
+- Q10a: "What's your design sensibility?" (options: minimal/functional, bold/expressive, system-driven, Other)
+- Q10b: "What design tool do you primarily use?" (options: Figma, Framer, CSS/code-first, Sketch, Other)
+
+Research:
+- Q10a: "What matters most in your research process?" (options: depth over speed, structured frameworks, serendipitous connections, Other)
+- Q10b: "How do you organize your findings?" (options: notes app, structured docs, tagging/linking, Other)
+
+Data:
+- Q10a: "What's your primary data environment?" (options: SQL/warehouses, Python/notebooks, dashboards/BI tools, Other)
+- Q10b: "What's your testing/validation approach?" (options: manual spot checks, automated tests, peer review, Other)
+
+Other domains:
+- Q10a: "What's the most important thing to know about how you work in this domain?" (open with Other)
+- Q10b: "What tool or workflow is central to this domain for you?" (open with Other)
+
+For each domain, after both seed questions are answered, compose the draft content for
+`~/context/domains/{domain}/memory.md`. Then use AskUserQuestion to present it:
+
+"Here's what I'll write to domains/{domain}/memory.md:
+
+---
+{draft content}
+---
+
+A) Save it — looks right
+B) Change something — I'll describe what to fix
+C) Skip this domain"
+
+If B: ask what to change, update the draft, and re-present via AskUserQuestion before writing.
+Only write the file after A is chosen.
 
 **Phase 5 — First project (optional)**
 Print the header: `## Phase 5 — First Project (optional)`

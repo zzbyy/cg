@@ -7,10 +7,10 @@
 ---
 
 ## Core beliefs
-<!-- What 3–5 beliefs guide your work across everything you do? -->
+<!-- Beliefs that guide your work — including things you've learned NOT to do -->
 
 ## Hard-won lessons
-<!-- What have you learned the hard way that you now always apply? -->
+<!-- 1–3 things you've learned the hard way that you now always apply -->
 
 ---
 *Last updated: —*
