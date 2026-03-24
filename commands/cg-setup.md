@@ -12,13 +12,15 @@ run it, use `/cg-new-project` to add a project or edit the files in `global/` an
 
 Check `~/context/registry.yaml` first. If `system.initiated` is `true`, say:
 "Setup is already complete (initiated {initiated_at}). Did you mean `/cg-status` or `/cg-new-project`?"
+Then stop — do not run any phases.
+
+Otherwise, go straight to Phase 1 with no preamble.
 
 ## Phases
 
 **Phase 1 — Welcome**
 Print the header: `## Phase 1 — Welcome`
-Open with something welcoming, not a status check. For example:
-"Let's build your context system. This takes about 10–15 minutes and you'll only do it once."
+Open directly: "Let's build your context system. This takes about 10–15 minutes and you'll only do it once."
 Then explain what we're building: context that loads at every session start, a monitor that
 watches for decisions and insights worth keeping, and a closure routine that stages what's
 worth saving for your approval before committing anything.
