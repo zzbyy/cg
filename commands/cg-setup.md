@@ -21,8 +21,8 @@ Print the Phase 1 header and begin the welcome narrative — nothing else.
 
 ## Phases
 
-**Phase 1 — Welcome**
-Print the header: `## Phase 1 — Welcome`
+**Welcome**
+Print the header: `## Welcome`
 
 Open with this narrative (write it as flowing prose, not a list):
 
@@ -44,8 +44,8 @@ Use AskUserQuestion: "Ready to begin?" with options A) Let's go and B) Tell me m
 If B: explain the Constructor (loads context at start), Monitor (watches for decisions worth
 keeping mid-session), and Evaluator (stages approved items at close). Then ask again.
 
-**Phase 2 — Identity**
-Print the header: `## Phase 2 — Identity`
+**Phase 1 — Identity**
+Print the header: `## Phase 1 — Identity`
 Ask each question using AskUserQuestion, one at a time. Wait for the answer before asking the next.
 
 Q1 — Working style:
@@ -76,8 +76,8 @@ Q4 — Good output:
 
 → Write `~/context/global/identity.md` from the answers. Show it. Ask for corrections.
 
-**Phase 3 — Principles**
-Print the header: `## Phase 3 — Principles`
+**Phase 2 — Principles**
+Print the header: `## Phase 2 — Principles`
 Ask each question using AskUserQuestion.
 
 Q5 — Core beliefs (open, offer archetypes):
@@ -100,8 +100,8 @@ Q6 — Hard-won lessons (open, offer starters):
 
 → Write `~/context/global/principles.md`. Show it. Ask for corrections.
 
-**Phase 4 — Non-negotiables & Preferences**
-Print the header: `## Phase 4 — Non-negotiables & Preferences`
+**Phase 3 — Non-negotiables & Preferences**
+Print the header: `## Phase 3 — Non-negotiables & Preferences`
 Ask each question using AskUserQuestion.
 
 Q7 — Never do (multiselect + Other):
@@ -135,8 +135,8 @@ Q9 — Tone and format preferences (multiselect):
 
 → Write `~/context/human/non-negotiables.md` and `preferences.yaml` from the answers. Show both. Confirm.
 
-**Phase 5 — Domains**
-Print the header: `## Phase 5 — Domains`
+**Phase 4 — Domains**
+Print the header: `## Phase 4 — Domains`
 
 Q10 — Active domains (multiselect):
   "What domains are you actively working in?"
@@ -160,8 +160,8 @@ answers plus Other:
 
 Write each domain's answer into `~/context/domains/{domain}/memory.md`.
 
-**Phase 6 — First project (optional)**
-Print the header: `## Phase 6 — First Project (optional)`
+**Phase 5 — First project (optional)**
+Print the header: `## Phase 5 — First Project (optional)`
 
 Use AskUserQuestion:
   "Want to set up a project now? You can always do this later with /cg-new-project."
@@ -170,8 +170,8 @@ Use AskUserQuestion:
 
 If A: run the /cg-new-project flow inline.
 
-**Phase 7 — Finalize**
-Print the header: `## Phase 7 — Finalize`
+**Phase 6 — Finalize**
+Print the header: `## Phase 6 — Finalize`
 Update `~/context/registry.yaml`:
 - Add all domains collected above
 - Set `system.initiated: true` and `initiated_at: {today}`
