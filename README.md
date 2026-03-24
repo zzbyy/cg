@@ -18,7 +18,7 @@ Claude loads your context at session start, watches for decisions and insights d
 ## Install
 
 ```bash
-git clone https://github.com/<you>/context-governance ~/context
+git clone https://github.com/zzbyy/cg ~/context
 cd ~/context && ./install.sh
 ```
 
@@ -98,9 +98,7 @@ After installing, the files in `global/` and `human/` are yours to edit freely. 
 │   ├── cg-inbox-stage    # Write approval-gated items to inbox/
 │   └── cg-history-append # Append session entry to history
 ├── commands/             # Slash command definitions (installed to ~/.claude/commands/)
-├── governance/           # System rules and templates
-│   ├── skill.md          # Pipeline rules
-│   ├── triggers.yaml     # When each stage fires
+├── governance/
 │   └── templates/        # checkpoint.md, manifest.md, write-back.md
 ├── projects/
 │   ├── _template/        # Scaffold for new projects
