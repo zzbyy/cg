@@ -1,13 +1,3 @@
-# Context Governance — what install.sh writes to ~/.claude/CLAUDE.md
-
-`install.sh` automatically appends the block below to your `~/.claude/CLAUDE.md`.
-This tells Claude to load your context at the start of every session.
-
-If you need to add it manually (e.g. re-installing on a new machine), copy the block below.
-
----
-
-```
 ## Context Governance
 
 You have a persistent context system at ~/context/.
@@ -100,4 +90,3 @@ Present as a single review block:
 - Never skip non-negotiables.md — it always wins
 - Never load projects/_archived/ unless explicitly asked
 - Never let a session end without attempting closure
-```

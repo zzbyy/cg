@@ -41,22 +41,19 @@ mkdir -p \
     "$CONTEXT_DIR/projects/_archived"
 echo "✓ directory structure ready"
 
-# 4. Check if CLAUDE.md already has constructor instructions
+# 4. Write context governance instructions to ~/.claude/CLAUDE.md
 echo ""
+mkdir -p "$(dirname "$CLAUDE_MD")"
 if [ -f "$CLAUDE_MD" ] && grep -q "cg-slug\|context governance\|context-governance" "$CLAUDE_MD" 2>/dev/null; then
     echo "✓ ~/.claude/CLAUDE.md already has context governance instructions"
 else
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "MANUAL STEP: Add context governance to your ~/.claude/CLAUDE.md"
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo ""
-    cat "$CONTEXT_DIR/docs/claude-md-snippet.md"
-    echo ""
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo ""
-    echo "Copy the block above into ~/.claude/CLAUDE.md"
-    echo "(Create the file if it doesn't exist)"
-    echo ""
+    # Ensure a blank line separator if the file already has content
+    if [ -f "$CLAUDE_MD" ] && [ -s "$CLAUDE_MD" ]; then
+        echo "" >> "$CLAUDE_MD"
+    fi
+    cat "$CONTEXT_DIR/docs/claude-md-raw.md" >> "$CLAUDE_MD"
+    echo "✓ Context governance instructions written to ~/.claude/CLAUDE.md"
 fi
 
+echo ""
 echo "Done. Open a new Claude Code session and run /cg-setup to get started."

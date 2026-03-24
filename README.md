@@ -21,10 +21,9 @@ This is not a chat history. It's structured memory — identity, principles, pro
 ## Quick start
 
 1. `git clone https://github.com/zzbyy/cg ~/context && cd ~/context && ./install.sh`
-2. Add the printed snippet to `~/.claude/CLAUDE.md`
-3. Open a new Claude Code session in any project directory
-4. Run `/cg-setup` — Claude walks you through populating your identity, preferences, and first project
-5. Work. Claude will prompt you when something is worth saving.
+2. Open a new Claude Code session in any project directory
+3. Run `/cg-setup` — Claude walks you through populating your identity, preferences, and first project
+4. Work. Claude will prompt you when something is worth saving.
 
 ---
 
@@ -41,9 +40,9 @@ The installer:
 - Makes `bin/` scripts executable
 - Copies the `/cg-*` slash commands to `~/.claude/commands/`
 - Creates the required directory structure
-- Checks your `~/.claude/CLAUDE.md` and prints the snippet to add if it's missing
+- Automatically appends the context governance instructions to `~/.claude/CLAUDE.md`
 
-Then add the printed snippet to `~/.claude/CLAUDE.md` (create the file if it doesn't exist). This tells Claude to load your context at the start of every session.
+That's it. No manual steps.
 
 ---
 
@@ -238,7 +237,7 @@ You can also create `domains/{name}/memory.md` for domain-specific knowledge (e.
 Re-run `cd ~/context && ./install.sh` — it copies the commands to `~/.claude/commands/`.
 
 **Constructor not running at session start?**
-Check that `~/.claude/CLAUDE.md` contains the context governance snippet. Run `./install.sh` to print it again.
+Check that `~/.claude/CLAUDE.md` contains the context governance section. Re-run `cd ~/context && ./install.sh` — it will append the section if it's missing.
 
 **`/cg-slug` not resolving your project?**
 Make sure the project's `path` in `registry.yaml` matches the actual directory path on disk. The resolver uses longest-prefix-match.
