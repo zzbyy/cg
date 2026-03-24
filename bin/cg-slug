@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+"""
+Resolve CWD (or argv[1]) to a project slug via longest-prefix-match.
+
+Usage:
+  eval "$(~/context/bin/cg-slug)"           # sets SLUG, PROJECT_NAME, PROJECT_PATH
+  eval "$(~/context/bin/cg-slug /some/path)" # resolve specific path
+
+Outputs shell assignments:
+  SLUG=<slug>             (or SLUG=NO_MATCH)
+  PROJECT_NAME=<name>
+  PROJECT_PATH=<path>
+"""
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cg_lib
+
+cwd = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
+slug, data = cg_lib.resolve_slug(cwd)
+
+if slug and isinstance(data, dict):
+    print(f"SLUG={slug}")
+    print(f"PROJECT_NAME={data.get('name', slug)}")
+    path = data.get('path', '')
+    if path:
+        print(f"PROJECT_PATH={path}")
+else:
+    print("SLUG=NO_MATCH")

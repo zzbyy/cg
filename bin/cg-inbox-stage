@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+"""
+Stage an item to ~/context/inbox/.
+
+Usage:
+  cg-inbox-stage --type decision \
+                 --slug my-project \
+                 --target projects/_active/my-project/decisions.md \
+                 --confidence high \
+                 --why "Explains why we chose X" \
+                 --content "Full content ready to merge" \
+                 [--title "Short title for filename"]
+
+Outputs:
+  STAGED=<full path>
+  FILENAME=<filename only>
+"""
+import sys
+import os
+import argparse
+import re
+from datetime import datetime
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cg_lib
+
+
+def slugify(s):
+    s = s.lower()
+    s = re.sub(r'[^a-z0-9]+', '-', s)
+    return s.strip('-')[:50]
+
+
+parser = argparse.ArgumentParser(description="Stage a context governance inbox item")
+parser.add_argument('--type', required=True, choices=['decision', 'memory', 'lesson', 'cross'],
+                    help="Item type")
+parser.add_argument('--slug', required=True, help="Project or domain slug")
+parser.add_argument('--target', required=True, help="Target file path (relative to ~/context/)")
+parser.add_argument('--confidence', default='medium', choices=['high', 'medium', 'low'])
+parser.add_argument('--why', required=True, help="One sentence: why this is worth keeping")
+parser.add_argument('--content', required=True, help="Full content to merge")
+parser.add_argument('--title', default='', help="Short title for the filename slug")
+args = parser.parse_args()
+
+now = datetime.now()
+timestamp = now.strftime('%Y%m%d-%H%M')
+title = args.title or args.why
+filename_slug = slugify(title)
+filename = f"{timestamp}--{args.slug}--{filename_slug}--{args.type}.md"
+
+content = f"""# Inbox Item — {args.type} — {now.strftime('%Y-%m-%d')}
+
+**Project/Domain:** {args.slug}
+**Write to:** {args.target}
+**Confidence:** {args.confidence}
+**Why it's worth keeping:** {args.why}
+
+---
+
+{args.content}
+"""
+
+inbox = cg_lib.inbox_dir()
+os.makedirs(inbox, exist_ok=True)
+out_path = os.path.join(inbox, filename)
+
+with open(out_path, 'w') as f:
+    f.write(content)
+
+print(f"STAGED={out_path}")
+print(f"FILENAME={filename}")

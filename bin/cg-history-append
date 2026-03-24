@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+"""
+Append a session entry to ~/context/history/sessions.md.
+
+Usage:
+  cg-history-append --project my-project \
+                    --task "Implemented X feature" \
+                    --summary "Built the core pipeline with Y approach" \
+                    [--decisions "Chose A over B because..."] \
+                    [--outcomes "X works, Y deferred"] \
+                    [--date 2026-03-24]
+
+Outputs:
+  APPENDED=<path to history file>
+"""
+import sys
+import os
+import argparse
+from datetime import date
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cg_lib
+
+parser = argparse.ArgumentParser(description="Append a session entry to history")
+parser.add_argument('--project', default='general', help="Project slug or domain")
+parser.add_argument('--task', required=True, help="One-line description of the session task")
+parser.add_argument('--summary', required=True, help="What happened this session")
+parser.add_argument('--decisions', default='', help="Key decisions made (optional)")
+parser.add_argument('--outcomes', default='', help="Outcomes and next steps (optional)")
+parser.add_argument('--date', default=str(date.today()), help="Session date (YYYY-MM-DD)")
+args = parser.parse_args()
+
+history_dir = os.path.join(cg_lib.CONTEXT_ROOT, 'history')
+os.makedirs(history_dir, exist_ok=True)
+history_file = os.path.join(history_dir, 'sessions.md')
+
+# Create with header if missing
+if not os.path.exists(history_file):
+    with open(history_file, 'w') as f:
+        f.write("# Session History\n\nChronological record of work sessions.\n")
+
+lines = [f"\n## {args.date} — {args.project} — {args.task}\n\n{args.summary}\n"]
+if args.decisions:
+    lines.append(f"\n**Decisions:** {args.decisions}\n")
+if args.outcomes:
+    lines.append(f"\n**Outcomes:** {args.outcomes}\n")
+
+with open(history_file, 'a') as f:
+    f.write(''.join(lines))
+
+print(f"APPENDED={history_file}")
