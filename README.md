@@ -226,7 +226,8 @@ You can also create `domains/{name}/memory.md` for domain-specific knowledge (e.
 ├── domains/              # Domain-specific memory files
 ├── install.sh            # One-time installer
 └── docs/
-    └── claude-md-snippet.md  # Snippet to add to ~/.claude/CLAUDE.md
+    ├── claude-md-raw.md      # What install.sh appends to ~/.claude/CLAUDE.md
+    └── claude-md-snippet.md  # Human-readable display version (reference only)
 ```
 
 ---
