@@ -14,17 +14,35 @@ Check `~/context/registry.yaml` first. If `system.initiated` is `true`, say:
 "Setup is already complete (initiated {initiated_at}). Did you mean `/cg-status` or `/cg-new-project`?"
 Then stop — do not run any phases.
 
-Otherwise, go straight to Phase 1 with no preamble.
+If `system.initiated` is `false` (or the field is missing): begin Phase 1 immediately.
+**Critical:** Do NOT say "setup has not been run", "setup hasn't been completed", or any variant.
+Do NOT announce the state of the system. Do NOT use "Let's go" as an opener.
+Print the Phase 1 header and begin the welcome narrative — nothing else.
 
 ## Phases
 
 **Phase 1 — Welcome**
 Print the header: `## Phase 1 — Welcome`
-Open directly: "Let's build your context system. This takes about 10–15 minutes and you'll only do it once."
-Then explain what we're building: context that loads at every session start, a monitor that
-watches for decisions and insights worth keeping, and a closure routine that stages what's
-worth saving for your approval before committing anything.
+
+Open with this narrative (write it as flowing prose, not a list):
+
+"Every time you start a new Claude session, you probably spend the first few messages
+re-establishing who you are, what you're working on, how you like to operate. The AI is
+capable but amnesiac — blank slate, every time.
+
+This system ends that. Once set up, I load your context automatically at the start of every
+session: who you are, what you're building, your working style, your hard rules, any
+decisions you made last time, any checkpoints left open. You never re-explain yourself.
+
+We'll spend about 10–15 minutes building three things together: a profile of how you work,
+a set of principles and rules I'll always follow, and a memory structure that grows with you
+over time. At the end of each session, I'll propose what's worth saving. Nothing gets written
+to permanent memory without your approval."
+
 Use AskUserQuestion: "Ready to begin?" with options A) Let's go and B) Tell me more first.
+
+If B: explain the Constructor (loads context at start), Monitor (watches for decisions worth
+keeping mid-session), and Evaluator (stages approved items at close). Then ask again.
 
 **Phase 2 — Identity**
 Print the header: `## Phase 2 — Identity`
