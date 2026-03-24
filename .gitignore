@@ -8,3 +8,12 @@ scratchpad/checkpoint.md
 
 # Temp files from bin/cg-slug
 /tmp/cg-slug-*
+
+# Personal data — not tracked in the public repo
+# Users: these dirs are yours. Track them in your own private fork if you want.
+projects/_active/*
+!projects/_active/.gitkeep
+projects/_archived/*
+!projects/_archived/.gitkeep
+history/sessions.md
+inbox/*.md
