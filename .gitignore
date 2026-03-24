@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Ephemeral session state (regenerated each session)
+scratchpad/manifest*.md
+scratchpad/checkpoint.md
+
+# Temp files from bin/cg-slug
+/tmp/cg-slug-*
